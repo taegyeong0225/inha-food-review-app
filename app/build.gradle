@@ -3,6 +3,11 @@ plugins {
 }
 
 android {
+
+    buildFeatures {
+        viewBinding true
+    }
+
     namespace 'com.example.android_final_app'
     compileSdk 34
 
@@ -29,6 +34,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
 
     implementation libs.appcompat
     implementation libs.material
