@@ -5,17 +5,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 public class memberDBHelper extends SQLiteOpenHelper {
+    private static final String TAG = "memberDBHelper";
+    private Context context;
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "MOBILE_FINAL_PROJECT.db";
 
     public static final String SQL_CREATE_TABLE =
             "CREATE TABLE " + memberDB.TABLE_MEMBER + " (" +
-                    memberDB.COL_NAME + " INTEGER PRIMARY KEY, " +
+                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    memberDB.COL_NAME + " TEXT, " +
                     memberDB.COL_EMAIL + " TEXT," +
                     memberDB.COL_ID + " TEXT," +
                     memberDB.COL_PASSWORD + " TEXT)";
@@ -25,6 +30,7 @@ public class memberDBHelper extends SQLiteOpenHelper {
 
     public memberDBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context=context;
     }
 
     @Override
@@ -47,6 +53,17 @@ public class memberDBHelper extends SQLiteOpenHelper {
         values.put(memberDB.COL_PASSWORD, password);
 
         long newRowId = db.insert(memberDB.TABLE_MEMBER, null, values);
+
+        Log.d(TAG, "New row ID: " + newRowId);
+        if (newRowId != -1) {
+            // 회원 추가 성공
+            Log.d(TAG, "New member inserted with ID: " + newRowId);
+            Toast.makeText(context, "회원 가입 성공", Toast.LENGTH_SHORT).show();
+        } else {
+            // 회원 추가 실패
+            Log.e(TAG, "Failed to insert new member");
+            Toast.makeText(context, "회원 가입 실패", Toast.LENGTH_SHORT).show();
+        }
         return newRowId;
     }
 

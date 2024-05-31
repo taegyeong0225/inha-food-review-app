@@ -50,8 +50,14 @@ public class JoinActivity extends AppCompatActivity {
                 String email = editEmail.getText().toString();
                 String id = editID.getText().toString();
                 String password = editPW.getText().toString();
+                String checkPassword = editCheckPW.getText().toString();
 
                 long newRowId = dbHelper.addMember(name, email, id, password);
+
+                if (!password.equals(checkPassword)) {
+                    Toast.makeText(JoinActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (newRowId != -1) {
                     Toast.makeText(JoinActivity.this, "가입이 완료되었습니다!", Toast.LENGTH_SHORT).show();
