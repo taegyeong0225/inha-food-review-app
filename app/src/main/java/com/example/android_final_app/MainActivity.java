@@ -2,6 +2,7 @@ package com.example.android_final_app;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.example.android_final_app.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity"; // 디버깅을 위한 태그 추가
     private ActivityMainBinding binding;
 
     @Override
@@ -48,14 +50,13 @@ public class MainActivity extends AppCompatActivity {
             } else if (itemId == R.id.fragment_settings) {
                 SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                 boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
+                Log.d(TAG, "isLoggedIn: " + isLoggedIn);
 
                 if (isLoggedIn) {
                     selectedFragment = new MembershipFragment();
                 } else {
                     selectedFragment = new SettingsFragment();
                 }
-            } else {
-                return false;
             }
 
             if (selectedFragment != null) {
