@@ -44,15 +44,15 @@
         app:layout_constraintTop_toTopOf="@+id/textView3">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/editTextId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="26dp"
             android:layout_marginBottom="96dp"
             android:ems="10"
             android:inputType="text"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextTextPassword"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,15 +63,15 @@
             android:layout_marginStart="41dp"
             android:text="ID"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextText"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextId"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextText" />
+            app:layout_constraintTop_toTopOf="@+id/editTextId" />
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editTextPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="26dp"
             android:ems="10"
             android:inputType="textPassword"
             app:layout_constraintBaseline_toBaselineOf="@+id/txtPW"
@@ -79,19 +79,18 @@
 
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="0dp"
+            android:layout_width="131dp"
             android:layout_height="43dp"
-            android:layout_marginTop="173dp"
+            android:layout_marginTop="172dp"
             android:layout_marginEnd="26dp"
-            android:layout_marginBottom="172dp"
+            android:layout_marginBottom="173dp"
             android:background="@drawable/round_button"
             android:text="LOGIN"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnGoJoin"
-            app:layout_constraintTop_toTopOf="@+id/editTextText" />
+            app:layout_constraintTop_toTopOf="@+id/editTextId" />
 
         <TextView
             android:id="@+id/txtPW"
@@ -109,15 +108,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="41dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="96dp"
+            android:layout_marginTop="48dp"
             android:background="#00ff0000"
             android:text="회원이 아니신가요? \n (회원가입 창으로 이동)"
             android:textColor="#9F9F9F"
             android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/btnLogin"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

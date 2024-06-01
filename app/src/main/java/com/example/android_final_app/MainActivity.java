@@ -1,10 +1,12 @@
 package com.example.android_final_app;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.android_final_app.databinding.ActivityMainBinding;
 
@@ -35,21 +37,33 @@ public class MainActivity extends AppCompatActivity {
     private void setBottomNavigationView() {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
+            Fragment selectedFragment = null;
+
             if (itemId == R.id.fragment_home) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new HomeFragment()).commit();
-                return true;
+                selectedFragment = new HomeFragment();
             } else if (itemId == R.id.fragment_register) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new RegisterFragment()).commit();
-                return true;
+                selectedFragment = new RegisterFragment();
             } else if (itemId == R.id.fragment_frequency) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new FrequencyFragment()).commit();
-                return true;
+                selectedFragment = new FrequencyFragment();
             } else if (itemId == R.id.fragment_settings) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new SettingsFragment()).commit();
-                return true;
+                SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                boolean isLoggedIn = preferences.getBoolean("isLoggedIn", false);
+
+                if (isLoggedIn) {
+                    selectedFragment = new MembershipFragment();
+                } else {
+                    selectedFragment = new SettingsFragment();
+                }
             } else {
                 return false;
             }
+
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_container, selectedFragment).commit();
+                return true;
+            }
+
+            return false;
         });
     }
 }
