@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.android_final_app.DB.memberDBHelper;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "LoginActivity"; // 디버깅을 위한 태그 추가
     private Button btnLogin;
     private Button btnGoJoin;
     private Toast objToast;
@@ -51,38 +53,44 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        // 로그인 버튼을 눌렀을 때
         if (v == btnLogin) {
             String id = editTextId.getText().toString();
             String password = editTextPassword.getText().toString();
+            Log.d(TAG, "ID: " + id + ", Password: " + password);
 
             if (isValidLogin(id, password)) {
-                // 로그인 성공 시 SharedPreferences에 상태와 사용자 이름 저장
+                Log.d(TAG, "로그인 성공");
+
                 SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("isLoggedIn", true);
                 editor.putString("userName", id); // 예시로 ID를 사용자 이름으로 저장
                 editor.apply();
 
+                Log.d(TAG, "로그인 상태 저장 완료");
+
                 Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
 
-                // MainActivity로 이동하여 적절한 프래그먼트 표시
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(mainIntent);
                 finish();
             } else {
+                Log.d(TAG, "로그인 실패");
                 Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
             }
-            // 회원가입으로 이동 버튼을 누른 경우
         } else if (v == btnGoJoin) {
             Intent joinIntent = new Intent(LoginActivity.this, JoinActivity.class);
             startActivity(joinIntent);
         }
     }
 
-    // 데이터베이스를 통해 로그인 유효성 검사
     private boolean isValidLogin(String id, String password) {
         Cursor cursor = dbHelper.getMember(id, password);
+        if (cursor != null) {
+            Log.d(TAG, "Cursor count: " + cursor.getCount());
+        } else {
+            Log.d(TAG, "Cursor is null");
+        }
         return cursor != null && cursor.getCount() > 0;
     }
 }
