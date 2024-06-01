@@ -81,8 +81,8 @@
 
         <EditText
             android:id="@+id/editID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="43dp"
             android:layout_marginTop="10dp"
             android:ems="10"
             android:inputType="text"
@@ -175,6 +175,19 @@
             app:layout_constraintEnd_toStartOf="@+id/editID"
             app:layout_constraintStart_toStartOf="@+id/editID"
             app:layout_constraintTop_toBottomOf="@+id/editID" />
+
+        <Button
+            android:id="@+id/btnCheckId"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="43dp"
+            android:layout_marginBottom="59dp"
+            android:text="중복\n확인"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/editPW"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/editID"
+            app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
