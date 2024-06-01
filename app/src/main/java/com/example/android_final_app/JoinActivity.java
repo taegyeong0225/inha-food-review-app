@@ -52,12 +52,20 @@ public class JoinActivity extends AppCompatActivity {
                 String password = editPW.getText().toString();
                 String checkPassword = editCheckPW.getText().toString();
 
-                long newRowId = dbHelper.addMember(name, email, id, password);
-
+                // 비밀번호 일치 여부 확인
                 if (!password.equals(checkPassword)) {
                     Toast.makeText(JoinActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                // ID가 비어 있는지 확인
+                if (id.isEmpty()) {
+                    Toast.makeText(JoinActivity.this, "ID를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 회원 정보 삽입
+                long newRowId = dbHelper.addMember(name, email, id, password);
 
                 if (newRowId != -1) {
                     Toast.makeText(JoinActivity.this, "가입이 완료되었습니다!", Toast.LENGTH_SHORT).show();
