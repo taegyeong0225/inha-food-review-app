@@ -130,4 +130,17 @@ public class memberDBHelper extends SQLiteOpenHelper {
         );
         return cursor;
     }
+
+    // ID 중복 여부 확인 메서드
+    public boolean isUserIdExists(String userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"id"};
+        String selection = "user_id = ?";
+        String[] selectionArgs = { userId };
+
+        Cursor cursor = db.query("members", columns, selection, selectionArgs, null, null, null);
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
 }

@@ -19,7 +19,7 @@ import com.example.android_final_app.DB.memberDBHelper;
 public class JoinActivity extends AppCompatActivity {
 
     private EditText editName, editEmail, editID, editPW, editCheckPW;
-    private Button joinButton;
+    private Button joinButton, idCheckButton;
     private memberDBHelper dbHelper;
 
     @Override
@@ -42,6 +42,7 @@ public class JoinActivity extends AppCompatActivity {
         editPW = findViewById(R.id.editPW);
         editCheckPW = findViewById(R.id.editCheckPW);
         joinButton = findViewById(R.id.btnJoin);
+        idCheckButton = findViewById(R.id.btnCheckId);
 
         joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,7 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 // 회원 정보 삽입
                 long newRowId = dbHelper.addMember(name, email, id, password);
 
@@ -74,5 +76,24 @@ public class JoinActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // ID 중복 확인 버튼 클릭 리스너
+        idCheckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String id = editID.getText().toString();
+                if (id.isEmpty()) {
+                    Toast.makeText(JoinActivity.this, "ID를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (dbHelper.isUserIdExists(id)) {
+                    Toast.makeText(JoinActivity.this, "이미 존재하는 ID입니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(JoinActivity.this, "사용 가능한 ID입니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 }
