@@ -2,6 +2,7 @@ package com.example.android_final_app;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -65,7 +66,6 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
 
-
                 // 회원 정보 삽입
                 long newRowId = dbHelper.addMember(name, email, id, password);
 
@@ -87,9 +87,13 @@ public class JoinActivity extends AppCompatActivity {
                     return;
                 }
 
+                Log.d("JoinActivity", "Checking if ID exists: " + id);
+
                 if (dbHelper.isUserIdExists(id)) {
+                    Log.d("JoinActivity", "ID exists: " + id);
                     Toast.makeText(JoinActivity.this, "이미 존재하는 ID입니다.", Toast.LENGTH_SHORT).show();
                 } else {
+                    Log.d("JoinActivity", "ID does not exist: " + id);
                     Toast.makeText(JoinActivity.this, "사용 가능한 ID입니다.", Toast.LENGTH_SHORT).show();
                 }
             }
