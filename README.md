@@ -79,9 +79,3 @@ Recommend: Boolean(DEFAULT 0) <br>
     <img src="https://github.com/taegyeong0225/mobile_app/assets/108190809/13c4bfa6-e3b8-44ed-9f1f-7f1e087352f3" alt="금산양꼬치" width="200" height="400">
     <img src="https://github.com/taegyeong0225/mobile_app/assets/108190809/2adf7b30-7cb1-47bf-b608-21493b572cf4" alt="존재않함" width="200" height="400">
 </div>
-
-<style>
-a {
-    text-decoration: none;
-}
-</style>
